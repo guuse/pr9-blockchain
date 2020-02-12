@@ -36,7 +36,7 @@ function nextBlockInfo() {
 function createHashString (blockInfo) {
     blockInfoString = (blockInfo.hash + blockInfo.from + blockInfo.to + blockInfo.amount + blockInfo.dataTimestamp + blockInfo.currentTimestamp + blockInfo.nonce);
     if (hashString !== null) {
-        hashSolver.decrypt(blockInfoString);
+        console.log(hashSolver.decrypt(blockInfoString));
     }
     else {
         console.log('De hash kon niet goed gecreëerd worden');
