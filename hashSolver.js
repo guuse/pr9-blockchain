@@ -4,16 +4,26 @@ const sha256 = require('js-sha256');
 let asciiArray          = [];
 let singleNumberArray   = [];
 let splicedArray        = [];
+let finalArray          = [];
 let finalString         = String;
 
 const hashSolver = (function () {
     const decrypt = (string) => {
-        console.log('Decoding: ' + string);
+        resetData();
         asciiConverter(removeSpaces(string));
         singleNumbers();
         spliceAndFill();
-        finalString = arrayToString(mergeArrays(splicedArray));
+        finalArray = mergeArrays(splicedArray);
+        finalString = arrayToString(finalArray);
         return hasher(finalString);
+    };
+
+    const resetData = () => {
+        asciiArray          = [];
+        singleNumberArray   = [];
+        splicedArray        = [];
+        finalArray          = [];
+        finalString         = '';
     };
 
     const removeSpaces = (string) => {
