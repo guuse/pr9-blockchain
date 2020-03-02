@@ -11,8 +11,8 @@ const hashSolver = (function () {
     const decrypt = (string) => {
         resetData();
         asciiConverter(removeSpaces(string));
-        singleNumbers();
-        spliceAndFill();
+        singleNumbers(asciiArray);
+        spliceAndFill(singleNumberArray);
         finalArray = mergeArrays(splicedArray);
         finalString = arrayToString(finalArray);
         return hasher(finalString);
@@ -41,10 +41,11 @@ const hashSolver = (function () {
                 }
             }
         }
+        return asciiArray;
     };
 
-    const singleNumbers = () => {
-        asciiArray.forEach((value, index) => {
+    const singleNumbers = (array) => {
+        array.forEach((value, index) => {
             Array.from(value.toString()).forEach((char) => {
                 singleNumberArray.push(parseInt(char))
             })
@@ -52,8 +53,8 @@ const hashSolver = (function () {
         return singleNumberArray;
     };
 
-    const spliceAndFill = () => {
-        _.chunk(singleNumberArray, 10).forEach(function (chunk) {
+    const spliceAndFill = (array) => {
+        _.chunk(array, 10).forEach(function (chunk) {
             if (chunk.length !== 10) {
                 let diff = 10 - chunk.length;
                 for (let i = 0; i < diff; i++) {
@@ -62,6 +63,7 @@ const hashSolver = (function () {
             }
             splicedArray.push(chunk);
         });
+        return splicedArray;
     };
 
     const mergeArrays = (arrayList) => {
@@ -91,7 +93,11 @@ const hashSolver = (function () {
     };
 
     return {
-        decrypt
+        decrypt,
+        asciiConverter,
+        singleNumbers,
+        spliceAndFill,
+        mergeArrays
     }
 
 }());

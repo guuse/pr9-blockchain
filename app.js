@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 const hashSolver = require('./hashSolver');
-const sha256 = require('js-sha256');
 
 let hashString;
 
@@ -9,7 +8,6 @@ init();
 function init() {
     console.log('App initiated :)');
     nextBlockInfo();
-
 }
 
 function nextBlockInfo() {
@@ -39,7 +37,7 @@ function createHashString(blockInfo) {
     blockInfoString = (blockInfo.from + blockInfo.to + blockInfo.amount + blockInfo.dataTimestamp + blockInfo.currentTimestamp);
 
     if (hashString !== null) {
-        nonceMining(blockInfo, hashSolver.decrypt(blockInfo.hash + blockInfoString + blockInfo.nonce), 195648);
+        nonceMining(blockInfo, hashSolver.decrypt(blockInfo.hash + blockInfoString + blockInfo.nonce), 1);
     }
     else {
         console.log('De hash kon niet goed gecreëerd worden');
